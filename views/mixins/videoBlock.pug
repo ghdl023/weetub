@@ -1,0 +1,7 @@
+mixin videoBlock(video = {})
+    //- h1= video.title
+    //- p= video.description
+    .videoBlock
+        iframe.videoBlcok__thumbnail(src=video.videoFile, controls=true)
+        h4.videoBlock__title= video.title
+        h6.videoBlcok__views= video.views
