@@ -11,8 +11,8 @@ const HOME = "/",
 
 const USERS = "/users",
     USER_DETAIL = "/:id",
-    EDIT_PROFILE = "/:id/edit-profile",
-    CHANGE_PASSWORD = "/:id/change-password";
+    EDIT_PROFILE = "/edit-profile",
+    CHANGE_PASSWORD = "/change-password";
 
 
 // Videos
