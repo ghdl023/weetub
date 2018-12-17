@@ -3,6 +3,6 @@ mixin videoBlock(video = {})
     //- p= video.description
     .videoBlock
         a(href=routes.videoDetail(video.id))
-            iframe.videoBlcok__thumbnail(src=video.videoFile, controls=true)
+            video.videoBlcok__thumbnail(src=video.videoFile, controls=true)
             h4.videoBlock__title= video.title
             h6.videoBlcok__views= video.views
