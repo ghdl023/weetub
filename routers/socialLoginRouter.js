@@ -8,7 +8,9 @@ const socialLoginRouter = express.Router();
 socialLoginRouter.get(routes.github, githubLogin);
 socialLoginRouter.get(
   routes.githubCallback,
-  passport.authenticate("github", { failureRedirect: "/login" }),
+  passport.authenticate("github", {
+    failureRedirect: "/login"
+  }),
   postGithubLogin
 );
 

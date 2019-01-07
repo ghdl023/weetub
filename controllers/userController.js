@@ -47,9 +47,30 @@ export const postGithubLogin = (req, res) => {
   // Successful authentication, redirect home.
   res.redirect(routes.home);
 };
-
-export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
-  console.log(accessToken, refreshToken, profile, cb);
+export const githubLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, avatar_url, name, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      console.log("hi 1");
+      user.githubId = id;
+      console.log("hi 2");
+      user.save();
+      console.log("hi 3");
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      githubId: id,
+      avatarUrl: avatar_url
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
 };
 
 export const logout = (req, res) => {

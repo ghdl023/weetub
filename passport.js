@@ -17,6 +17,5 @@ passport.use(
     githubLoginCallback
   )
 );
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
