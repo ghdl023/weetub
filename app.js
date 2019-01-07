@@ -13,6 +13,7 @@ import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import oauthRouter from "./routers/socialLoginRouter";
 import "./passport";
 
 const app = express();
@@ -42,5 +43,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.auth, oauthRouter);
 
 export default app;
