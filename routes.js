@@ -29,8 +29,8 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 
 // Facebook
 
-const FACEBOOK = "/facebook";
-const FACEBOOK_CALLBACK = "/facebook/callback";
+const FACEBOOK = "/auth/facebook";
+const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 
 const routes = {
   home: HOME,

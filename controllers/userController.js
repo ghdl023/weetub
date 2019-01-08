@@ -43,10 +43,6 @@ export const postLogin = passport.authenticate("local", {
 
 export const githubLogin = passport.authenticate("github");
 
-export const postGithubLogin = (req, res) => {
-  // Successful authentication, redirect home.
-  res.redirect(routes.home);
-};
 export const githubLoginCallback = async (
   accessToken,
   refreshToken,
@@ -75,6 +71,27 @@ export const githubLoginCallback = async (
   } catch (error) {
     return cb(error);
   }
+};
+
+export const postGithubLogin = (req, res) => {
+  // Successful authentication, redirect home.
+  res.redirect(routes.home);
+};
+
+export const facebookLogin = passport.authenticate("facebook");
+
+export const facebookLoginCallback = (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+
+export const postFacebookLogin = (req, res) => {
+  // Successful authentication, redirect home.
+  res.redirect(routes.home);
 };
 
 export const logout = (req, res) => {
