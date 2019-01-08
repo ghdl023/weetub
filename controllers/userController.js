@@ -41,7 +41,15 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home
 });
 
+/*
+  Github Login 
+*/
+
+// Github Login Step 1. 사용자를 github 페이지로 보냄.
+
 export const githubLogin = passport.authenticate("github");
+
+// Github Login Step 2. github페이지에서 사용자가 승인을 완료하고 돌아오면 수행되는 함수
 
 export const githubLoginCallback = async (
   accessToken,
@@ -73,21 +81,54 @@ export const githubLoginCallback = async (
   }
 };
 
+// Github Login Step 3.
+
 export const postGithubLogin = (req, res) => {
   // Successful authentication, redirect home.
   res.redirect(routes.home);
 };
 
+/*
+  Facebook Login 
+*/
+
+// Facebook Login Step 1.
+
 export const facebookLogin = passport.authenticate("facebook");
 
-export const facebookLoginCallback = (
+// Facebook Login Step 2.
+
+export const facebookLoginCallback = async (
   accessToken,
   refreshToken,
   profile,
   cb
 ) => {
-  console.log(accessToken, refreshToken, profile, cb);
+  // console.log(accessToken, refreshToken, profile, cb);
+  const {
+    _json: { id, name, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.facebookId = id;
+      user.avatarUrl = `https://graph.facebook.com/${id}/picture?type=large`;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      facebookId: id,
+      avatarUrl: `https://graph.facebook.com/${id}/picture?type=large`
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
 };
+
+// Facebook Login Step 3.
 
 export const postFacebookLogin = (req, res) => {
   // Successful authentication, redirect home.
