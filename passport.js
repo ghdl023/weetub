@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      callbackURL: `http://localhost:4000${routes.auth}${routes.githubCallback}`
+      callbackURL: `http://localhost:4000${routes.githubCallback}`
     },
     // 사용자가 github page에서 돌아오면 실행되는 함수
     githubLoginCallback
